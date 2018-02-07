@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+    <h1>Hangman! Doomsday style</h1>
+
+    <div id="game">
+        <p>Press any key to get started</p>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="jumbotron">
+                        <h2>puzzle
+                            <span id=puzzles>
+                                <strong>Your Guesses so far</strong>
+                            </span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- We have to put this at the end of our document to ensure the user-text
+         span exists when we try to access it. -->
+    <script type="text/javascript">
+        var gameNum = 0;
+        var wins = 0;
+        var guesses = 0;
+        var userguesses = "";
+
+        var puzzles = {
+            pzl1: ["Type of fruit & edgy electronic artist", "_ _ _ _ _ _ _", "Peaches"],
+            pzl2: ["An extinct mammal--2 words", "_ _ _ _ _  _ _ _ _ _ _ _", "wooly mammoth"]
+        }
+
+        // Let's start by grabbing a reference to the <span> below.
+        var userText = document.getElementById("user-text");
+        // Next, we give JavaScript a function to execute when onkeyup event fires.
+        document.onkeyup = function (event) {
+            userText.textContent = event.key;
+        };
+
+        for (var i = 1; i <= 10; i++) {
+            var hint = puzzles["pzl" + i][1];
+            var puzzle = confirm(puzzles["pzl" + i][1]);
+            var solution = puzzles["pzl" + i][2];
+        }
+
+        var html =
+            "<p>Game #: " + gameNum + "</p>" +
+            "<p>Wins: " + wins + "</p>" +
+            "<p>Number of Guesses Remaining: " + guesses + "</p>" +
+            "<p>Letters already guessed: " + userguesses + "</p>";
+
+        document.querySelector("#game").innerHTML = html;
+    </script>
+
+</body>
+
+</html>
+
+<!--![Hangman](Images/2-Hangman.jpg)
+
+1. [Watch the demo](hangman-game-demo.mov).
+
+2. Choose a theme for your game! In the demo, we picked an 80s theme: 80s questions, 80s sound and an 80s aesthetic. You can choose any subject for your theme, though, so be creative!
+
+3. Use key events to listen for the letters that your players will type.
+
+4. Display the following on the page:
+
+5. Press any key to get started!
+
+6. Wins: (# of times user guessed the word correctly).
+
+   * If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
+
+   * As the user guesses the correct letters, reveal them: `m a d o _  _ a`.
+
+7. Number of Guesses Remaining: (# of guesses remaining for the user).
+
+8. Letters Already Guessed: (Letters the user has guessed, displayed like `L Z Y H`).
+
+9. After the user wins/loses the game should automatically choose another word and make the user play it.
+
+##### Hangman Game Bonuses
+
+1. Play a sound or song when the user guesses their word correctly, like in our demo.
+2. Write some stylish CSS rules to make a design that fits your game's theme.
+3. **HARD MODE:** Organize your game code as an object, except for the key events to get the letter guessed. This will be a challenge if you haven't coded with JavaScript before, but we encourage anyone already familiar with the language to try this out.
+4. Save your whole game and its properties in an object.
+5. Save any of your game's functions as methods, and call them underneath your object declaration using event listeners.
+6. Don't forget to place your global variables and functions above your object.
+   * Remember: global variables, then objects, then calls.
+7. Definitely talk with a TA or your instructor if you get tripped up during this challenge.-->
