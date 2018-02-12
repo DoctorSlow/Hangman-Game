@@ -1,4 +1,4 @@
-var currentPuzzle = document.getElementById("currentPuzzle");
+var CurrentPuzzle = document.getElementById("currentPuzzle");
 var userGuess = document.getElementById("userGuess");
 var gameCount = document.getElementById("gameCount");
 var guessesLeft = document.getElementById("guessesLeft");
@@ -13,10 +13,10 @@ var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
     'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 
-var puzzles = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA', 'TORTILLA',
+var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA', 'TORTILLA',
     'BISBEE', 'COYOTE'
 ];
-var currentPuzzle = "";
+var puzzle = "";
 var correctGuesses = [];
 var incorrectGuesses = [];
 var guessedLetters = [];
@@ -28,15 +28,15 @@ function puzzleDisplay() {
     correctGuesses = [];
     guessedLetters = [];
 
-    currentPuzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
-    answerArray = currentPuzzle.split("");
+    puzzle = puzzleArray[Math.floor(Math.random() * puzzleArray.length)];
+    answerArray = puzzle.split("");
     underscoreArray = answerArray.length;
 
     for (var i = 0; i < underscoreArray; i++) {
         correctGuesses.push("_");
     }
-    guessCount = currentPuzzle.length + 5;
-    currentPuzzle.innerHTML = correctGuesses.join(" ");
+    guessCount = puzzle.length + 3;
+    puzzle.innerHTML = correctGuesses.join(" ");
     guessesLeft.innerHTML = guessCount;
 };
 
@@ -51,14 +51,14 @@ function checkLetter(userInput) {
         var lettersInWord = false;
 
         for (var i = 0; i < underscoreArray; i++) {
-            if (currentPuzzle[i] === userInput) {
+            if (puzzle[i] === userInput) {
                 lettersInWord = true;
             }
         }
 
         if (lettersInWord) {
             for (i = 0; i < underscoreArray; i++) {
-                if (currentPuzzle[i] === userInput) {
+                if (puzzle[i] === userInput) {
                     correctGuesses[i] = userInput;
                 }
             }
@@ -67,7 +67,7 @@ function checkLetter(userInput) {
 };
 
 function checkWinLoss() {
-    currentPuzzle.innerHTML = correctGuesses.join(" ");
+    puzzle.innerHTML = correctGuesses.join(" ");
     userGuess.innerHTML = guessedLetters.join(" ");
     guessesLeft.innerHTML = guessCount;
 
