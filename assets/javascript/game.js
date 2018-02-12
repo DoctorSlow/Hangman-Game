@@ -1,23 +1,20 @@
-var currentHint = document.getElementById("current-hint");
-var currentWord = document.getElementById("current-puzzle");
-var userGuess = document.getElementById("user-guess");
+var currentPuzzle = document.getElementById("currentPuzzle");
+var userGuess = document.getElementById("userGuess");
 var gameCount = document.getElementById("gameCount");
 var guessesLeft = document.getElementById("guessesLeft");
-var userScore = document.getElementById("userscore");
-var score = 0;
+var userWins = document.getElementById("userWins");
+var userLosses = document.getElementById("userLosses");
+var wins = 0;
+var losses = 0;
 var gameCount = 0;
 var guessCount = 0;
 var guessesLeft = 5;
 var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
     'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
-var hints = ['fruit; also an edgy electronic artist', 'extinct mammal; also a metal band',
-    'native American tribe of the southwest', 'a fermented food',
-    'varietals include: English and Armenian among others', 'motorcycle brand', 'desert dweller',
-    'not a martini', 'a country within a country', 'a force of nature'
-];
-var puzzles = ['PEACHES', 'MASTODON', 'HOPI', 'NATTO', 'CUCUMBERS', 'TRIUMPH', 'JAVALINA', 'MANHATTAN',
-    'LESOTHO', 'TSUNAMI'
+
+var puzzles = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA', 'TORTILLA',
+    'BISBEE', 'COYOTE'
 ];
 var currentPuzzle = "";
 var correctGuesses = [];
@@ -31,18 +28,15 @@ function puzzleDisplay() {
     correctGuesses = [];
     guessedLetters = [];
 
-    currentPuzzle = puzzles;
+    currentPuzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
     answerArray = currentPuzzle.split("");
     underscoreArray = answerArray.length;
-
-    currentHint = hints;
-
 
     for (var i = 0; i < underscoreArray; i++) {
         correctGuesses.push("_");
     }
-    guessCount = puzzle.length + 5;
-    currentWord.innerHTML = correctGuesses.join(" ");
+    guessCount = currentPuzzle.length + 5;
+    currentPuzzle.innerHTML = correctGuesses.join(" ");
     guessesLeft.innerHTML = guessCount;
 };
 
@@ -57,15 +51,15 @@ function checkLetter(userInput) {
         var lettersInWord = false;
 
         for (var i = 0; i < underscoreArray; i++) {
-            if (puzzle[i] === userInput) {
+            if (currentPuzzle[i] === userInput) {
                 lettersInWord = true;
             }
         }
 
         if (lettersInWord) {
             for (i = 0; i < underscoreArray; i++) {
-                if (puzzle[i] === userInput) {
-                    correctGuess[i] = userInput;
+                if (currentPuzzle[i] === userInput) {
+                    correctGuesses[i] = userInput;
                 }
             }
         }
@@ -73,25 +67,24 @@ function checkLetter(userInput) {
 };
 
 function checkWinLoss() {
-    currentPuzzle.innerHTML = correctGuess.join(" ");
+    currentPuzzle.innerHTML = correctGuesses.join(" ");
     userGuess.innerHTML = guessedLetters.join(" ");
     guessesLeft.innerHTML = guessCount;
 
-    setTimeout(function () {
-        if (answerArray.join(" ") === correctGuess.join(" ")) {
-            wins++;
-            alert("Hurrah! You're a champ!");
-            userWins.innerHTML = wins;
-            puzzleDisplay();
-        } else if (guessCount <= 0) {
-            losses++;
-            userLosses.innerHTML = losses;
-            userGuess.innerHTML = "";
-            alert("Oh no, you've ran out of guesses. Too bad! Try again");
-            puzzleDisplay();
-        }
-
-    });
+    if (answerArray.join(" ") === correctGuesses.join(" ")) {
+        wins++;
+        gameCount++;
+        alert("Hurrah! You're a champ!");
+        userWins.innerHTML = wins;
+        puzzleDisplay();
+    } else if (guessCount <= 0) {
+        losses++;
+        gameCount++;
+        userLosses.innerHTML = losses;
+        userGuess.innerHTML = "";
+        alert("Oh no, you've ran out of guesses. Too bad! Try again");
+        puzzleDisplay();
+    }
 };
 
 puzzleDisplay()
