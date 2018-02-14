@@ -1,3 +1,15 @@
+html,
 body {
-    background-image: url(../images/grey_sandbag_@2X.png);
+    background: url(../images/GrandCanyon.jpg) no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Chelsea Market', cursive;
+}
+
+.container {
+    padding-top: 80px;
+}
+
+h1,
+h2 {
+    text-align: center;
 }

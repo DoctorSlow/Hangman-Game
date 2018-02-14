@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Arizona Hangman Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Chelsea+Market" rel="stylesheet">
 </head>
 
 <body>
@@ -17,126 +17,34 @@
                 <div class="jumbotron">
                     <h1>Arizona Hangman Game!</h1>
                     <h2>Press any key to get started</h2>
-                    <p>Game #: </p>
-                    <span id="game-Count">
-                    </span>
-                    <p>User Wins: </p>
-                    <span id="user-Wins"></span>
-                    <p>User Losses: </p>
-                    <span id="user-Losses"></span>
-                    <p>User Guesses: </p>
-                    <span id="user-Guesses"></span>
-                    <p># of Guesses Remaining: </p>
-                    <span id="guesses-Left"></span>
                     <br>
-                    <h3>Current Puzzle: </h3>
-                    <span id="current-Puzzle"></span>
+                    <p>Game #:
+                        <span id="game-Count">
+                        </span>
+                    </p>
+                    <p>User Wins:
+                        <span id="user-Wins"></span>
+                    </p>
+                    <p>User Losses:
+                        <span id="user-Losses"></span>
+                    </p>
+                    <p>User Guesses:
+                        <span id="user-Guesses"></span>
+                    </p>
+                    <p># of Guesses Remaining:
+                        <span id="guesses-Left"></span>
+                    </p>
+                    <br>
+                    <h2>Current Puzzle:
+                        <span id="current-Puzzle"></span>
+                    </h2>
 
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        var gameCount = document.getElementById("game-Count");
-        var userWins = document.getElementById("user-Wins");
-        var userLosses = document.getElementById("user-Losses");
-        var userGuesses = document.getElementById("user-Guesses");
-        var guessesLeft = document.getElementById("guesses-Left");
-        var currentPuzzle = document.getElementById("current-Puzzle");
-        var wins = 0;
-        var losses = 0;
-        var gameNum = 1;
-        var guessCount = 0;
-        //var guessesLeft = 5;
-        var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-            'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-        ];
-
-        var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA',
-            'TORTILLA',
-            'BISBEE', 'COYOTE'
-        ];
-        var puzzle = "";
-        var correctGuesses = [];
-        var incorrectGuesses = [];
-        var guessedLetters = [];
-        var answerArray = [];
-        var underscoreArray = [];
-        var userInput = [];
-
-        function puzzleDisplay() {
-
-            correctGuesses = [];
-            guessedLetters = [];
-
-            puzzle = puzzleArray[Math.floor(Math.random() * puzzleArray.length)];
-            answerArray = puzzle.split("");
-            underscoreArray = answerArray.length;
-
-            for (var i = 0; i < underscoreArray; i++) {
-                correctGuesses.push("_");
-            }
-            guessCount = puzzle.length + 3;
-            currentPuzzle.innerHTML = correctGuesses.join(" ");
-            guessesLeft.innerHTML = guessCount;
-            gameCount.innerHTML = gameNum;
-        };
-
-        function checkLetter(userInput) {
-            if (alphabet.includes(userInput.toUpperCase())) {
-                if (!guessedLetters.includes(userInput)) {
-                    guessedLetters.push(userInput);
-                    guessCount--;
-                    userGuesses.innerHTML = guessedLetters;
-                }
-
-                var lettersInWord = false;
-
-                for (var i = 0; i < underscoreArray; i++) {
-                    if (puzzle[i] === userInput) {
-                        lettersInWord = true;
-                    }
-                }
-
-                if (lettersInWord) {
-                    for (i = 0; i < underscoreArray; i++) {
-                        if (puzzle[i] === userInput) {
-                            correctGuesses[i] = userInput;
-                        }
-                    }
-                }
-            }
-        };
-
-        function checkWinLoss() {
-            puzzle.innerHTML = correctGuesses.join(" ");
-            userGuesses.innerHTML = guessedLetters.join(" ");
-            guessesLeft.innerHTML = guessCount;
-
-            if (answerArray.join(" ") === correctGuesses.join(" ")) {
-                wins++;
-                gameNum++;
-                alert("Hurrah! You're a champ!");
-                userWins.innerHTML = wins;
-                puzzleDisplay();
-            } else if (guessCount <= 0) {
-                currentPuzzle.innerHTML = puzzle;
-                losses++;
-                gameNum++;
-                userLosses.innerHTML = losses;
-                userGuesses.innerHTML = "";
-                alert("Oh no, you've ran out of guesses. Too bad! Try again");
-                puzzleDisplay();
-            }
-        };
-
-        puzzleDisplay()
-        document.onkeyup = function (event) {
-            var userInput = String.fromCharCode(event.keyCode).toUpperCase();
-            checkLetter(userInput);
-            checkWinLoss();
-        }
+    <script type="text/javascript" src="assets/javascript/game.js">
     </script>
 
 </body>

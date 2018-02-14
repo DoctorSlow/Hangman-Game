@@ -1,27 +1,29 @@
-var CurrentPuzzle = document.getElementById("currentPuzzle");
-var userGuess = document.getElementById("userGuess");
-//var gameCount = document.getElementById("gameCount");
-var guessesLeft = document.getElementById("guessesLeft");
-var userWins = document.getElementById("userWins");
-var userLosses = document.getElementById("userLosses");
+var gameCount = document.getElementById("game-Count");
+var userWins = document.getElementById("user-Wins");
+var userLosses = document.getElementById("user-Losses");
+var userGuesses = document.getElementById("user-Guesses");
+var guessesLeft = document.getElementById("guesses-Left");
+var currentPuzzle = document.getElementById("current-Puzzle");
 var wins = 0;
 var losses = 0;
-var gameCount = 0;
+var gameNum = 1;
 var guessCount = 0;
-//var guessesLeft = 5;
 var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
     'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 
-var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA', 'TORTILLA',
+var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA',
+    'TORTILLA',
     'BISBEE', 'COYOTE'
 ];
+var uniqueArray = puzzleArray.filter(function (itm, i, puzzleArray) {
+    return i == puzzleArray.indexOf(itm);
+});
 var puzzle = "";
 var correctGuesses = [];
-var incorrectGuesses = [];
 var guessedLetters = [];
 var answerArray = [];
-var underscoreArray = [];
+var underscoreArray = 0;
 
 function puzzleDisplay() {
 
@@ -36,8 +38,10 @@ function puzzleDisplay() {
         correctGuesses.push("_");
     }
     guessCount = puzzle.length + 3;
-    puzzle.innerHTML = correctGuesses.join(" ");
+    currentPuzzle.innerHTML = correctGuesses.join(" ");
     guessesLeft.innerHTML = guessCount;
+    gameCount.innerHTML = gameNum;
+
 };
 
 function checkLetter(userInput) {
@@ -45,18 +49,18 @@ function checkLetter(userInput) {
         if (!guessedLetters.includes(userInput)) {
             guessedLetters.push(userInput);
             guessCount--;
-            userGuess.innerHTML = guessedLetters;
+            userGuesses.innerHTML = guessedLetters;
         }
 
-        var lettersInWord = false;
+        var lettersInPuzzle = false;
 
         for (var i = 0; i < underscoreArray; i++) {
             if (puzzle[i] === userInput) {
-                lettersInWord = true;
+                lettersInPuzzle = true;
             }
         }
 
-        if (lettersInWord) {
+        if (lettersInPuzzle) {
             for (i = 0; i < underscoreArray; i++) {
                 if (puzzle[i] === userInput) {
                     correctGuesses[i] = userInput;
@@ -67,22 +71,22 @@ function checkLetter(userInput) {
 };
 
 function checkWinLoss() {
-    puzzle.innerHTML = correctGuesses.join(" ");
-    userGuess.innerHTML = guessedLetters.join(" ");
+    currentPuzzle.innerHTML = correctGuesses.join(" ");
+    userGuesses.innerHTML = guessedLetters.join(" ");
     guessesLeft.innerHTML = guessCount;
 
     if (answerArray.join(" ") === correctGuesses.join(" ")) {
         wins++;
-        gameCount++;
-        alert("Hurrah! You're a champ!");
+        gameNum++;
+        alert("Answer = " + puzzle + ". Hurrah! You're a champ! Ready for another?");
         userWins.innerHTML = wins;
         puzzleDisplay();
     } else if (guessCount <= 0) {
         losses++;
-        gameCount++;
+        gameNum++;
         userLosses.innerHTML = losses;
-        userGuess.innerHTML = "";
-        alert("Oh no, you've ran out of guesses. Too bad! Try again");
+        userGuesses.innerHTML = "";
+        alert("Oh no, you've ran out of guesses. Too bad! Answer = " + puzzle + ". Try again.");
         puzzleDisplay();
     }
 };
