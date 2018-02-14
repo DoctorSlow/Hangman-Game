@@ -1,6 +1,6 @@
 var CurrentPuzzle = document.getElementById("currentPuzzle");
 var userGuess = document.getElementById("userGuess");
-var gameCount = document.getElementById("gameCount");
+//var gameCount = document.getElementById("gameCount");
 var guessesLeft = document.getElementById("guessesLeft");
 var userWins = document.getElementById("userWins");
 var userLosses = document.getElementById("userLosses");
@@ -8,7 +8,7 @@ var wins = 0;
 var losses = 0;
 var gameCount = 0;
 var guessCount = 0;
-var guessesLeft = 5;
+//var guessesLeft = 5;
 var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
     'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
