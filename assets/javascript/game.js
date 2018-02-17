@@ -11,7 +11,6 @@ var guessCount = 0;
 var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
     'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
-
 var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA',
     'TORTILLA',
     'BISBEE', 'COYOTE'
@@ -41,6 +40,7 @@ function puzzleDisplay() {
     currentPuzzle.innerHTML = correctGuesses.join(" ");
     guessesLeft.innerHTML = guessCount;
     gameCount.innerHTML = gameNum;
+    uniqueArray.push();
 
 };
 
@@ -80,6 +80,7 @@ function checkWinLoss() {
         gameNum++;
         alert("Answer = " + puzzle + ". Hurrah! You're a champ! Ready for another?");
         userWins.innerHTML = wins;
+        userGuesses.innerHTML = "";
         puzzleDisplay();
     } else if (guessCount <= 0) {
         losses++;
