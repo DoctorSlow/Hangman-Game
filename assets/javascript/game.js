@@ -12,10 +12,11 @@ var guessCount = 0;
 var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
     'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
-var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA',
-    'BURRITO',
-    'BISBEE', 'SEDONA'
-];
+// var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO', 'TARANTULA', 'ROADRUNNER', 'CACTUS', 'JAVALINA',
+//     'BURRITO',
+//     'BISBEE', 'SEDONA'
+// ];
+var puzzleArray = ['TOMBSTONE', 'NAVAJO', 'SAGUARO'];
 var uniqueArray = [];
 var puzzle = "";
 var correctGuesses = [];
@@ -38,10 +39,14 @@ function puzzleDisplay() {
     if (uniqueArray.length == puzzleArray.length) {
         if (wins > losses) {
             alert("Game Over--you won! You really know your Arizona. Congratulations.");
+            // resetGame();
         } else {
-            alert("Game Over--you lost! Get outside and get to know Arizona better, already.")
+            alert("Game Over--you lost! Get outside and get to know Arizona better, already.");
+            // resetGame();
         }
         return;
+        // resetGame();
+
     }
     //intialize settings for each puzzle
     answerArray = puzzle.split("");
@@ -116,6 +121,23 @@ function checkWinLoss() {
     }
 
 };
+
+// function resetGame() {
+//     uniqueArray = [];
+//     wins = 0;
+//     loses = 0;
+//     gameNum = 1;
+//     guessCount = 0;
+//     userWins.innerHTML = wins;
+//     userLosses.innerHTML = losses;
+//     userGuesses.innerHTML = "";
+//     gameCount.innerHTML = gameNum;
+//     gussesLeft.innerHTML = guessCount;
+//     window.setTimeout(function () {
+//         alert("Thanks for playing! Play again?");
+//         puzzleDisplay();
+//     }, 300);
+// };
 
 //run/re-run game & convert user guesses to uppercase
 puzzleDisplay()
